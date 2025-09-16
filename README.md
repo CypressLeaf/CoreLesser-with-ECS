@@ -7,7 +7,7 @@ This project was generated with a Kotlin project template that includes Kotlin a
 ## 许可证
 
 - **源代码** 根据 **GNU General Public License v3.0** 授权。
-- **所有艺术资产**（美术、声音、音乐、模型等）版权所有 (C) CypressLeaf，保留所有权利，并受 [CoreLesser EULA](链接到您的EULA) 保护。
+- **所有艺术资产**（美术、声音、音乐、模型等）版权所有 (C) CypressLeaf，保留所有权利，并受 [CoreLesser EULA](https://github.com/CypressLeaf/CoreLesser-with-ECS/blob/main/EULA.md) 保护。
 
 ## Platforms
 
