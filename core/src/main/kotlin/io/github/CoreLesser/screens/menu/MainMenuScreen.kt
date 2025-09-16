@@ -2,11 +2,12 @@ package io.github.CoreLesser.screens
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
-import com.badlogic.gdx.graphics.Texture
+import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Stage
-import com.badlogic.gdx.scenes.scene2d.ui.Image
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.viewport.ExtendViewport
 import com.kotcrab.vis.ui.widget.VisTable
+import io.github.CoreLesser.screens.menu.SettingsMenu
 import io.github.CoreLesser.ui.GameTextButton
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
@@ -15,6 +16,8 @@ import ktx.app.KtxScreen
 class MainMenuScreen(
     private val game: KtxGame<KtxScreen>
 ) : KtxScreen {
+    // 导入设置菜单
+    private val settingsMenu = SettingsMenu(game)
     // 定义舞台和视口类型
     private val stage : Stage = Stage(ExtendViewport(1280f,720f))
     // 定义根列表用于存储内容
@@ -22,13 +25,33 @@ class MainMenuScreen(
         setFillParent(true)
         center()
     }
-    // 定义按钮列表用于存储按钮
+    // 定义按钮列表
     private val buttonsTable : VisTable = VisTable().apply {
         padLeft(-810f)
     }
     // 定义主菜单按钮
     private val buttons = listOf(
-        GameTextButton("战役",24)
+        GameTextButton("战役",24),
+        GameTextButton("联机",24),
+        GameTextButton("教程",24),
+        GameTextButton("设置",24).apply {
+            addListener(object : ClickListener() {
+                override fun clicked(event: InputEvent?, x: Float, y: Float) {
+                    if (settingsMenu.isVisible) {
+                        settingsMenu.isVisible = false
+                    } else if (!settingsMenu.isVisible) {
+                        settingsMenu.isVisible = true
+                    }
+                }
+            })
+        },
+        GameTextButton("退出",24).apply {
+            addListener(object : ClickListener() {
+                override fun clicked(event: InputEvent?, x: Float, y: Float) {
+                    Gdx.app.exit()
+                }
+            })
+        },
     )
     // 初始化主菜单
     init {
@@ -38,6 +61,7 @@ class MainMenuScreen(
     private fun createMainMenu() {
         stage.addActor(rootTable)
         rootTable.add(buttonsTable)
+        stage.addActor(settingsMenu)
         buttonsTable.apply {
             for (i in buttons.indices) {
                 add(buttons[i]).width(200f).height(40f).pad(10f).row()

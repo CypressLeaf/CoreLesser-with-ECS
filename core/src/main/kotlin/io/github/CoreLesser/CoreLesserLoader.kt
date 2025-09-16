@@ -1,20 +1,10 @@
 package io.github.CoreLesser
 
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.Texture.TextureFilter.Linear
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
-import com.badlogic.gdx.utils.Array
 import com.kotcrab.vis.ui.VisUI
-import io.github.CoreLesser.screens.MainMenuScreen
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
-import ktx.app.clearScreen
-import ktx.assets.disposeSafely
-import ktx.assets.toInternalFile
 import ktx.async.KtxAsync
-import ktx.collections.GdxArray
-import ktx.graphics.use
 
 class CoreLesserLoader : KtxGame<KtxScreen>() {
     // 定义一个屏幕列表防止重复
@@ -23,8 +13,6 @@ class CoreLesserLoader : KtxGame<KtxScreen>() {
     override fun create() {
         KtxAsync.initiate()
         VisUI.load()
-        addScreen(MainMenuScreen(this))
-        setScreen<MainMenuScreen>()
     }
     // 重写addScreen方法
     override fun <Type : KtxScreen> addScreen(type: Class<Type>, screen: Type) {
