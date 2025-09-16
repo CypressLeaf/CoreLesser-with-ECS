@@ -2,7 +2,9 @@ package io.github.CoreLesser.screens
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.GL20
+import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.utils.viewport.ExtendViewport
 import com.kotcrab.vis.ui.widget.VisTable
 import io.github.CoreLesser.ui.GameTextButton
@@ -18,11 +20,12 @@ class MainMenuScreen(
     // 定义根列表用于存储内容
     private val rootTable : VisTable = VisTable().apply {
         setFillParent(true)
-        left()
-        padLeft(80f)
+        center()
     }
     // 定义按钮列表用于存储按钮
-    private val buttonsTable : VisTable = VisTable().apply {}
+    private val buttonsTable : VisTable = VisTable().apply {
+        padLeft(-810f)
+    }
     // 定义主菜单按钮
     private val buttons = listOf(
         GameTextButton("战役",24)
@@ -37,7 +40,7 @@ class MainMenuScreen(
         rootTable.add(buttonsTable)
         buttonsTable.apply {
             for (i in buttons.indices) {
-                add(buttons[i]).width(200f).height(40f).row()
+                add(buttons[i]).width(200f).height(40f).pad(10f).row()
             }
         }
     }

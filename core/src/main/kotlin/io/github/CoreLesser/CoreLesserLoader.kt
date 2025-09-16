@@ -29,7 +29,7 @@ class CoreLesserLoader : KtxGame<KtxScreen>() {
     // 重写addScreen方法
     override fun <Type : KtxScreen> addScreen(type: Class<Type>, screen: Type) {
         if (screenList.any { it::class == screen::class }) {
-            Gdx.app.log("屏幕管理器","已经具有屏幕：${screen::class}")
+            Gdx.app.log("屏幕管理器","已经具有该类型屏幕：${screen::class}")
         } else {
             screenList.add(screen)
             super.addScreen(type, screen)

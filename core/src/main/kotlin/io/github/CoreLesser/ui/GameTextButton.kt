@@ -6,7 +6,7 @@ import io.github.CoreLesser.manager.FontManager
 
 class GameTextButton(
     private val text : String,
-    private val textSize : Int
+    textSize : Int
 ) : VisTextButton(
     text,
 ) {

@@ -4,6 +4,11 @@ A [libGDX](https://libgdx.com/) project generated with [gdx-liftoff](https://git
 
 This project was generated with a Kotlin project template that includes Kotlin application launchers and [KTX](https://libktx.github.io/) utilities.
 
+## 许可证
+
+- **源代码** 根据 **GNU General Public License v3.0** 授权。
+- **所有艺术资产**（美术、声音、音乐、模型等）版权所有 (C) CypressLeaf，保留所有权利，并受 [CoreLesser EULA](链接到您的EULA) 保护。
+
 ## Platforms
 
 - `core`: Main module with the application logic shared by all platforms.
