@@ -2,6 +2,9 @@ package io.github.CoreLesser
 
 import com.badlogic.gdx.Gdx
 import com.kotcrab.vis.ui.VisUI
+import io.github.CoreLesser.enumclass.Language
+import io.github.CoreLesser.manager.I18NManager
+import io.github.CoreLesser.screens.MainMenuScreen
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
 import ktx.async.KtxAsync
@@ -13,6 +16,9 @@ class CoreLesserLoader : KtxGame<KtxScreen>() {
     override fun create() {
         KtxAsync.initiate()
         VisUI.load()
+        I18NManager.setLanguage(Language.SIMPLE_CHINESE)
+        addScreen(MainMenuScreen(this))
+        setScreen<MainMenuScreen>()
     }
     // 重写addScreen方法
     override fun <Type : KtxScreen> addScreen(type: Class<Type>, screen: Type) {

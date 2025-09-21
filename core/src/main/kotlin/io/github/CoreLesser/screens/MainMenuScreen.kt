@@ -1,13 +1,17 @@
 package io.github.CoreLesser.screens
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.GL20
+import com.badlogic.gdx.math.Vector2
+import com.badlogic.gdx.physics.box2d.joints.MouseJoint
 import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.utils.viewport.ExtendViewport
 import com.kotcrab.vis.ui.widget.VisTable
-import io.github.CoreLesser.screens.menu.SettingsMenu
+import io.github.CoreLesser.manager.I18NManager
+import io.github.CoreLesser.screens.settings.SettingsMenuScreen
 import io.github.CoreLesser.ui.GameTextButton
 import ktx.app.KtxGame
 import ktx.app.KtxScreen
@@ -16,20 +20,15 @@ import ktx.app.KtxScreen
 class MainMenuScreen(
     private val game: KtxGame<KtxScreen>
 ) : KtxScreen {
-    // 导入设置菜单
-    private val settingsMenu = SettingsMenu(game)
     // 定义舞台和视口类型
     private val stage : Stage = Stage(ExtendViewport(1280f,720f))
-    // 定义根列表用于存储内容
-    private val rootTable : VisTable = VisTable().apply {
-        setFillParent(true)
-        center()
-    }
     // 定义按钮列表
     private val buttonsTable : VisTable = VisTable().apply {
-        padLeft(-810f)
+        setFillParent(true)
+        left()
+        padLeft(40f)
     }
-    // 定义主菜单按钮
+    // 定义按钮
     private val buttons = listOf(
         GameTextButton("战役",24),
         GameTextButton("联机",24),
@@ -37,11 +36,8 @@ class MainMenuScreen(
         GameTextButton("设置",24).apply {
             addListener(object : ClickListener() {
                 override fun clicked(event: InputEvent?, x: Float, y: Float) {
-                    if (settingsMenu.isVisible) {
-                        settingsMenu.isVisible = false
-                    } else if (!settingsMenu.isVisible) {
-                        settingsMenu.isVisible = true
-                    }
+                    game.addScreen(SettingsMenuScreen(game))
+                    game.setScreen<SettingsMenuScreen>()
                 }
             })
         },
@@ -53,24 +49,37 @@ class MainMenuScreen(
             })
         },
     )
+    // 定义按钮文本
+    private val buttonsText = listOf(
+        "战役",
+        "联机",
+        "教程",
+        "设置",
+        "退出"
+    )
     // 初始化主菜单
     init {
         createMainMenu()
     }
     // 主菜单构建函数
     private fun createMainMenu() {
-        stage.addActor(rootTable)
-        rootTable.add(buttonsTable)
-        stage.addActor(settingsMenu)
+        stage.addActor(buttonsTable)
         buttonsTable.apply {
             for (i in buttons.indices) {
                 add(buttons[i]).width(200f).height(40f).pad(10f).row()
             }
         }
     }
+    // 更新文本
+    private fun updateText() {
+        for (i in buttonsText.indices) {
+            buttons[i].setText(I18NManager.getString(buttonsText[i]))
+        }
+    }
     // 展示
     override fun show() {
         Gdx.input.inputProcessor = stage
+        updateText()
     }
     // 渲染
     override fun render(delta: Float) {

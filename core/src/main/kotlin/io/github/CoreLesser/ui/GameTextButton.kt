@@ -4,16 +4,18 @@ import com.kotcrab.vis.ui.VisUI
 import com.kotcrab.vis.ui.widget.VisTextButton
 import io.github.CoreLesser.manager.FontManager
 
-class GameTextButton(
+open class GameTextButton(
     private val text : String,
-    textSize : Int
+    private val textSize : Int
 ) : VisTextButton(
     text,
 ) {
     init {
-        val style = VisTextButtonStyle(VisUI.getSkin().get(VisTextButtonStyle::class.java))
-        style.font = FontManager.loadAllFonts(textSize)
+        val style = VisTextButtonStyle(VisUI.getSkin().get(VisTextButtonStyle::class.java)).apply {
+            font = FontManager.loadAllFonts(textSize)
+        }
         this.style = style
         this.text
+        this.textSize
     }
 }

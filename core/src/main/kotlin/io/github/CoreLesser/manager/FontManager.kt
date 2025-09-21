@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter
 import com.badlogic.gdx.utils.Disposable
 
+// 字符管理器
 object FontManager : Disposable {
     // 加载所有字符
     fun loadAllFonts(textSize: Int) : BitmapFont {
